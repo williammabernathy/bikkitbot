@@ -11,7 +11,7 @@
   <h1 align="center">BikkitBot</h1>
 
   <p align="center">
-    A simple discord bot built with discord.js to track basic League of Legends related data for MooseRx and others
+    A simple discord bot built to alleviate repeated functions and consolodate them into a single place. Also memes.
     <br />
     <a href="https://github.com/williammabernathy/bikkitbot/issues">Report Bug</a>
     ·
