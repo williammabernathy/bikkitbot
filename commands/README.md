@@ -22,10 +22,21 @@
 ```
 - displays an embedded message with various user defined resources
 - Ex. !resources phas, !resources ffxiv
+```
+!randomize
+```
+- displays a randomizer for a specified game
+- parameters are user defined
+- passing the game as the only parameter will display the randomizer parameters
+- Ex. !resources phas d0-d5 m0-m15
 
 
 <br><br>
 ## Other
+```
+!pussy
+```
+- random cat pic
 ```
 !daddy
 ```
