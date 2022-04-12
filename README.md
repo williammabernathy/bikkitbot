@@ -13,9 +13,9 @@
   <p align="center">
     A simple discord bot built with discord.js to track basic League of Legends related data for MooseRx and others
     <br />
-    <a href="https://github.com/williammabernathy/Moose-Bot/issues">Report Bug</a>
+    <a href="https://github.com/williammabernathy/bikkitbot/issues">Report Bug</a>
     ·
-    <a href="https://github.com/williammabernathy/Moose-Bot/issues">Request Feature</a>
+    <a href="https://github.com/williammabernathy/bikkitbot/issues">Request Feature</a>
   </p>
 </p>
 
@@ -49,7 +49,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-A simple discord bot built as a learning project for node.js. This project is strictly designed for my personal discord server, but can somewhat easily be edited for any discord. While it revoles around the user MooseRx, it works for anyone, as per passed arguments, for any given command. 
+A simple discord bot built as a learning project for node.js. This project is strictly designed for a personal discord server.
 
 ### Built With
 
@@ -88,14 +88,16 @@ Install/update npm:
    ```json
    {
 	    "prefix": "!",
+	    "clientId : "",
+	    "guildId: "",
 	    "token": "DISCORD TOKEN HERE",
-	    "riotToken": "RIOT API HERE",
 	    "devs": [ "DISCORD USER ID 1", "DISCORD USER ID 2" ]
     }
    ```
    - **prefix**: the prefix used before a command. Ex. !into, !ping.
+   - **clientId**: the unique ID assigned to your bot
+   - **guildId**: the unique ID used to identify a server
    - **token**: discord bot token.
-   - **riotToken**: riot API token.
    - **devs**: discord ID of those with access to dev commands.
 
 <!-- CONTRIBUTING -->
@@ -120,8 +122,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 William Matthew Abernathy - matthew.abernathy123@gmail.com
-
-Project Link: [https://loop-hero-randomizer.netlify.app/](https://loop-hero-randomizer.netlify.app/)
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
