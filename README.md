@@ -8,7 +8,7 @@
 <br />
 <p align="center">
 
-  <h1 align="center">Moose Bot</h1>
+  <h1 align="center">BikkitBot</h1>
 
   <p align="center">
     A simple discord bot built with discord.js to track basic League of Legends related data for MooseRx and others
