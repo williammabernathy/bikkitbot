@@ -63,7 +63,7 @@ A simple discord bot built as a learning project for node.js. This project is st
 ## Getting Started
 
 - Just a few simple steps to get the project running. <br>
-- Find the list of command documentation [here](https://github.com/williammabernathy/Moose-Bot/tree/master/commands#commands).
+- Find the list of command documentation [here](https://github.com/williammabernathy/bikkitbot/tree/main/commands#commands).
 
 ### Prerequisites
 
