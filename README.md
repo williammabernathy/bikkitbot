@@ -75,21 +75,20 @@ Install/update npm:
 
 ### Installation
 
-1. Get a free API Key at [https://developer.riotgames.com/](https://developer.riotgames.com/)
-2. Clone the repo:
+1. Clone the repo:
    ```sh
-   git clone https://github.com/williammabernathy/Moose-Bot.git
+   git clone https://github.com/williammabernathy/bikkitbot.git
    ```
-3. Install NPM packages:
+2. Install NPM packages:
    ```sh
    npm install
    ```
-4. Enter the following in a ***newly created folder in the same directory as this README*** `config.json`:
+3. Enter the following in a ***newly created folder in the same directory as this README*** `config.json`:
    ```json
    {
 	    "prefix": "!",
-	    "clientId : "",
-	    "guildId: "",
+	    "clientId": "XXXXXXXXXXXXX",
+	    "guildId": "XXXXXXXXXXXXX",
 	    "token": "DISCORD TOKEN HERE",
 	    "devs": [ "DISCORD USER ID 1", "DISCORD USER ID 2" ]
     }
