@@ -1,10 +1,7 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('dev')
-    .setDescription('various dev commands for those with permissions'),
-  async execute(channel, args) {
-    await channel.send('Dev commands (expect not yet)');
+  name: "dev",
+  description: "various dev commands for those with permissions",
+  execute(message, args) {
+    message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("Dev commands (except not yet)");
   },
 };

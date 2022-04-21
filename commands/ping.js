@@ -1,10 +1,8 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('ping')
-    .setDescription('Replies with Pong!'),
-  async execute(channel, args) {
-    await channel.send('Pong! I can hear you!');
+  name: "ping",
+  description: "Replies with Pong!",
+  execute(message, args) {
+    //message.channel.send("Pong! I can hear you!");
+    message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("Pong! I can hear you!");
   },
 };

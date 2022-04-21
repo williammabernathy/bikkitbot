@@ -1,11 +1,9 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("daddy")
-    .setDescription("I mean, it's daddy"),
-  async execute(channel, args) {
+  name: "daddy",
+  description: "I mean, it's daddy",
+  execute(message, args) {
     const daddyEmbed = new MessageEmbed()
       .setColor("#FF4500")
       .setTitle("Tyler1")
@@ -25,6 +23,6 @@ module.exports = {
       .setImage("https://i.imgur.com/dyQKrEk.jpg")
       .setFooter({ text: "Daddy pls" });
 
-    await channel.send({ embeds: [daddyEmbed] });
+      message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send({ embeds: [daddyEmbed] });
   },
 };

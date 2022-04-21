@@ -1,57 +1,38 @@
-const fs = require('node:fs');
-const { Client, Collection, Intents } = require('discord.js');
-const { prefix, token } = require('./config.json');
+const fs = require("node:fs");
+const { Client, Collection, Intents } = require("discord.js");
+const { prefix, token } = require("./config.json");
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }); // build the bot client
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const botCommands = require("./commands"); // get and require our command folder
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.data.name, command);
-}
-
-client.once('ready', () => {
-	console.log('Ready!');
+// map all commands inside ./commands directory
+Object.keys(botCommands).map((key) => {
+  client.commands.set(botCommands[key].name, botCommands[key]);
 });
 
-client.on('messageCreate', message => {
-	if (message.content[0] !== prefix) return;
-	
-	// const ch = client.channels.cache.find(c => c.name === `bot-spam`);
-	// console.log(ch);
-
-	const args = message.content.split(/ +/);
-  	const command = args.shift().toLowerCase();
-
-	const commandParsed = client.commands.get(command.substring(1));
-	const channel = client.channels.cache.find(c => c.name === `bot-spam`);
-
-	try {
-		commandParsed.execute(channel, args);
-	} catch (error) {
-		console.error(error);
-	}
+client.once("ready", () => {
+  console.log("Ready!");
 });
 
+client.on("messageCreate", (message) => {
+  if (message.content[0] !== prefix) return;
 
-// client.on('interactionCreate', interaction => {
-// 	if (!interaction.isCommand()) return;
+  const args = message.content.split(/ +/);
+  const command = args.shift().toLowerCase();
 
-// 	console.log(interaction);
+  if (!client.commands.has(command.substring(1))) return;
 
-// 	const command = client.commands.get(interaction.commandName);
-// 	const channel = client.channels.cache.get('963181751751024660');
+  // const commandParsed = client.commands.get(command.substring(1));
+  // const channel = client.channels.cache.find(c => c.name === `bot-spam`);
 
-// 	if (!command) return;
-
-// 	try {
-// 		command.execute(interaction, channel);
-// 	} catch (error) {
-// 		console.error(error);
-// 		interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-// 	}
-// });
+  try {
+    //commandParsed.execute(channel, args);
+    client.commands.get(command.substring(1)).execute(message, args);
+  } catch (error) {
+    console.error(error);
+	message.reply("Oops! Something went wrong trying to execute that command.");
+  }
+});
 
 client.login(token);

@@ -1,19 +1,17 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("randomize")
-    .setDescription("randomizes phasmophobia levels and difficulty"),
-  execute(channel, args) {
+  name: "randomize",
+  description: "randomizes phasmophobia levels and difficulty",
+  execute(message, args) {
 
     // check that args has necessary values
     if (typeof args[0] === 'undefined' || args[0] === undefined) {
-      channel.send("You must specify map sizes!");
+      message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("You must specify map sizes!");
       return;
     }
     if (typeof args[1] === 'undefined' || args[1] === undefined || !args[1].includes("-")) {
-      channel.send("You must specify a difficult range!");
+      message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("You must specify a difficult range!");
       return;
     }
 
@@ -64,6 +62,6 @@ module.exports = {
         { name: "Difficulty", value: String(randDiff), inline: true }
       );
 
-    channel.send({ embeds: [randomEmbed] });
+      message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send({ embeds: [randomEmbed] });
   },
 };

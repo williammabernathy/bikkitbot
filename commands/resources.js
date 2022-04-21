@@ -1,11 +1,14 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('resources')
-        .setDescription('Posts Useful Phasmophobia Resources'),
-    async execute(channel, args) {
+    name: 'resources',
+    description: 'Posts Useful Phasmophobia Resources',
+    execute(message, args) {
+
+        if (typeof args[0] === 'undefined' || args[0] === undefined) {
+            message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("Please specify a game to display resources for.");
+            return;
+        }
 
         if (args[0].toLowerCase().includes("phas")) {
             const introEmbed = new MessageEmbed()
@@ -18,10 +21,10 @@ module.exports = {
 
                 )
 
-            await channel.send({ embeds: [introEmbed] });
+            message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send({ embeds: [introEmbed] });
         }
         else {
-            await channel.send("No resources found for " + args[0]);
+            message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("No resources found for " + args[0]);
         }
     },
 };

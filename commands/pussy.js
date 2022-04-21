@@ -1,18 +1,22 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const { get } = require("snekfetch");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('pussy')
-        .setDescription('Cute cat pics.'),
-    async execute(channel, args) {
-
-        try {
-            get('https://aws.random.cat/meow').then(response => {
-                channel.send({ files: [{ attachment: response.body.file, name: `cat.${response.body.file.split('.')[4]}` }] });
-            })
-        } catch (e) {
-            channel.send('Error fetching pussy ):');
-        }
-    },
+  name: "pussy",
+  description: "Cute cat pics.",
+  execute(message, args) {
+    try {
+      get("https://aws.random.cat/meow").then((response) => {
+        message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send({
+          files: [
+            {
+              attachment: response.body.file,
+              name: `cat.${response.body.file.split(".")[4]}`,
+            },
+          ],
+        });
+      });
+    } catch (e) {
+      message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("Error fetching pussy ):");
+    }
+  },
 };
