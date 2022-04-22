@@ -10,4 +10,5 @@ module.exports = {
     //Pussy: require('./pussy'),
     Randomize: require('./randomize'),
     Resources: require('./resources'),
+    Music: require('./music'),
   };
