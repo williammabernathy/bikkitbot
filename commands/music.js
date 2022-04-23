@@ -24,7 +24,7 @@ module.exports = {
         }
 
         let guildQueue = message.client.player.getQueue(message.guild.id);
-        command = args[0]
+        command = args[0].toLowerCase();
 
         if (command === 'play') {
             let queue = message.client.player.createQueue(message.guild.id);
@@ -48,82 +48,145 @@ module.exports = {
         }
 
         if (command === 'skip') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.skip();
         }
 
         if (command === 'stop') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.stop();
         }
 
-        if (command === 'removeLoop') {
+        if (command === 'removeloop') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.setRepeatMode(RepeatMode.DISABLED); // or 0 instead of RepeatMode.DISABLED
         }
 
-        if (command === 'toggleLoop') {
+        if (command === 'toggleloop') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.setRepeatMode(RepeatMode.SONG); // or 1 instead of RepeatMode.SONG
         }
 
-        if (command === 'toggleQueueLoop') {
+        if (command === 'togglequeueloop') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.setRepeatMode(RepeatMode.QUEUE); // or 2 instead of RepeatMode.QUEUE
         }
 
-        if (command === 'setVolume') {
-            guildQueue.setVolume(parseInt(args[0]));
+        if (command === 'setvolume') {
+            if (typeof args[1] === 'undefined' || args[1] === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("You must specify a volume level (0-200)!");
+                return;
+            }
+
+            guildQueue.setVolume(parseInt(args[1]));
         }
 
         if (command === 'seek') {
-            guildQueue.seek(parseInt(args[0]) * 1000);
+            if (typeof args[1] === 'undefined' || args[1] === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("You must specify a time (in seconds)!");
+                return;
+            }
+
+            guildQueue.seek(parseInt(args[1]) * 1000);
         }
 
-        if (command === 'clearQueue') {
+        if (command === 'clearqueue') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.clearQueue();
         }
 
         if (command === 'shuffle') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.shuffle();
         }
 
-        if (command === 'getQueue') {
-            const songCount = guildQueue.songs.length;
-            let output = '';
-            // guildQueue.songs.forEach((s, idx) => {
-            //     output += `${s.name} ~ # in queue: ${idx}${idx < songCount - 1 ? ', ' : ''}`
-            // });
-
-
+        if (command === 'getqueue') {
             const songEmbed = new MessageEmbed()
                 .setColor("#FF4500")
                 .setTitle("Music Queue")
                 .setDescription("Songs currently in queue");
 
             guildQueue.songs.forEach((s, idx) => {
-                songEmbed.addField(`# in queue: ${idx+1}`, `${s.name}`);
+                songEmbed.addField(`# in queue: ${idx + 1}`, `${s.name}`);
             });
 
             message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send({ embeds: [songEmbed] });
         }
 
-        if (command === 'getVolume') {
+        if (command === 'getvolume') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send(`Current volume: ${guildQueue.volume}`)
         }
 
-        if (command === 'nowPlaying') {
+        if (command === 'nowplaying') {
             message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send(`Now playing: ${guildQueue.nowPlaying}`);
         }
 
         if (command === 'pause') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.setPaused(true);
         }
 
         if (command === 'resume') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             guildQueue.setPaused(false);
         }
 
         if (command === 'remove') {
+            if (typeof args[1] === 'undefined' || args[1] === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("You must specify a queue position!");
+                return;
+            }
+
             guildQueue.remove(parseInt(args[1]));
         }
 
-        if (command === 'createProgressBar') {
+        if (command === 'progressbar') {
+            if (typeof guildQueue === 'undefined' || guildQueue === undefined) {
+                message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send("There are no songs in queue");
+                return;
+            }
+
             const ProgressBar = guildQueue.createProgressBar();
 
             message.guild.channels.cache.find(ch => ch.name === 'bot-spam').send(ProgressBar.prettier);
